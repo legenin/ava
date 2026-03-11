@@ -18,26 +18,52 @@ public partial class MainWindow : Window
         MenuItemsSource = new ObservableCollection<MenuItemModel>();
         InitializeComponent();
         SetupMenu();
+
+        var exitMenuItem = this.FindControl<MenuItem>("ExitMenuItem");
+        if (exitMenuItem != null)
+        {
+            exitMenuItem.Click += OnExitMenuItemClicked;
+        }
+
+        var projectWindowMenuItem = this.FindControl<MenuItem>("ProjectWindowMenuItem");
+        if (projectWindowMenuItem != null)
+        {
+            projectWindowMenuItem.Click += OnProjectWindowMenuItemClicked;
+        }
+
         ToggleMenuBtn.Click += OnToggleMenuClicked;
+    }
+
+    private void OnProjectWindowMenuItemClicked(object? sender, RoutedEventArgs e)
+    {
+        _isMenuCollapsed = false; // Разворачиваем меню
+        ToggleMenuBtn.IsVisible = !_isMenuCollapsed;
+        MainMenuTree.IsVisible = !_isMenuCollapsed;
+        UpdateLayout();           // Обновляем ширину
+    }
+
+    private void OnExitMenuItemClicked(object? sender, RoutedEventArgs e)
+    {
+        Close(); // Закрывает окно и завершает приложение
     }
 
     private void SetupMenu()
     {
         var menuItems = new[]
         {
-            new MenuItemModel("Элемент 1"),
-            new MenuItemModel("Элемент 2",
-                new MenuItemModel("Подэлемент 2.1"),
-                new MenuItemModel("Подэлемент 2.2"),
-                new MenuItemModel("Подэлемент 2.3")),
-            new MenuItemModel("Элемент 3"),
-            new MenuItemModel("Элемент 4"),
-            new MenuItemModel("Элемент 5"),
-            new MenuItemModel("Элемент 6"),
-            new MenuItemModel("Элемент 7"),
-            new MenuItemModel("Элемент 8"),
-            new MenuItemModel("Элемент 9"),
-            new MenuItemModel("Элемент 10")
+            new MenuItemModel("Общие данные"),
+            new MenuItemModel("Геометрия",
+                new MenuItemModel("Форма корпуса"),
+                new MenuItemModel("Отсеки"),
+                new MenuItemModel("Надстройки")),
+            new MenuItemModel("Гидростатика"),
+            new MenuItemModel("Случаи загрузки"),
+            new MenuItemModel("Остойчивость"),
+            new MenuItemModel("Аварийная остойчивость"),
+            new MenuItemModel("Вероятностый индекс деления на отсеки"),
+            new MenuItemModel("Интегральный усилия на тихой воде"),
+            new MenuItemModel("Расчет надводного борта"),
+            new MenuItemModel("Обработка результатов кренования")
         };
 
         foreach (var item in menuItems)
@@ -51,6 +77,8 @@ public partial class MainWindow : Window
     private void OnToggleMenuClicked(object? sender, RoutedEventArgs e)
     {
         _isMenuCollapsed = !_isMenuCollapsed;
+        ToggleMenuBtn.IsVisible = !_isMenuCollapsed;
+        MainMenuTree.IsVisible = !_isMenuCollapsed;
         UpdateLayout();
     }
 
@@ -62,13 +90,13 @@ public partial class MainWindow : Window
             var columns = grid.ColumnDefinitions;
             if (_isMenuCollapsed)
             {
-                columns[0].Width = new GridLength(60);       // ✅ Скрыть меню полностью
-                columns[2].Width = new GridLength(0.8, GridUnitType.Star); // Расширить 3-ю часть
+                columns[0].Width = new GridLength(0);       // ✅ Скрыть меню полностью
+                columns[2].Width = new GridLength(1, GridUnitType.Star); // Расширить 3-ю часть
             }
             else
             {
-                columns[0].Width = new GridLength(0.3, GridUnitType.Star); // Показать меню
-                columns[2].Width = new GridLength(0.65, GridUnitType.Star); // Вернуть ширину
+                columns[0].Width = new GridLength(360); // Показать меню
+                columns[2].Width = new GridLength(1, GridUnitType.Star); // Вернуть ширину
             }
         }
     }
