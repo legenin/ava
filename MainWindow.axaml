@@ -3,19 +3,46 @@
         xmlns:local="clr-namespace:ava"
         x:Class="ava.MainWindow"
         x:DataType="{x:Type local:MainWindow}"
-        Title="Главный экран"
+        Title="Остойчивость"
         Width="1200"
         Height="700">
-  <Grid RowDefinitions="100, *" ColumnDefinitions="300, *" Margin="5">
+  <Grid RowDefinitions="Auto, 100, *" ColumnDefinitions="360, *" Margin="5">
     
+    <!-- Новая строка: горизонтальное меню -->
+    <Menu Grid.Row="0" Grid.ColumnSpan="2">
+      <MenuItem Header="_Файл">
+        <MenuItem Header="_Открыть"/>
+        <MenuItem Header="_Сохранить"/>
+        <Separator/>
+        <MenuItem Header="_Выход"/>
+      </MenuItem>
+      <MenuItem Header="_Правка">
+        <MenuItem Header="_Отменить"/>
+        <MenuItem Header="_Повторить"/>
+        <Separator/>
+        <MenuItem Header="_Копировать"/>
+        <MenuItem Header="_Вставить"/>
+      </MenuItem>
+      <MenuItem Header="_Вид">
+        <MenuItem Header="_Тёмная тема"/>
+        <MenuItem Header="_Светлая тема"/>
+      </MenuItem>
+      <MenuItem Header="_Справочники">
+        <MenuItem Header="_Пользователи"/>
+        <MenuItem Header="_Организации"/>
+        <MenuItem Header="_Должности"/>
+      </MenuItem>
+    </Menu>
+
     <!-- Первая строка -->
-    <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="300, *">
+    <Grid Grid.Row="1" Grid.ColumnSpan="2" ColumnDefinitions="360, *">
       <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,30,0,0">
-        <StackPanel Orientation="Horizontal" Spacing="0">
-          <ComboBox Name="RequirementsCombo" PlaceholderText="Выберите проект..." Width="200"/>
-          <Button Name="CreateBtn" Content="➕" Width="30" Height="30" ToolTip.Tip="Создать"/>
-          <Button Name="EditBtn" Content="✏️" Width="30" Height="30" ToolTip.Tip="Редактировать"/>
-          <Button Name="FindBtn" Content="🔍" Width="30" Height="30" ToolTip.Tip="Найти"/>
+        <StackPanel Orientation="Horizontal" Spacing="3">
+            <TextBlock Text="Проект" VerticalAlignment="Center"/>
+            <ComboBox Name="RequirementsCombo" PlaceholderText="Выберите проект..." Width="200"/>
+            <Button Name="CreateBtn" Content="➕" Width="30" Height="30" ToolTip.Tip="Создать"/>
+            <Button Name="EditBtn" Content="✏️" Width="30" Height="30" ToolTip.Tip="Редактировать"/>
+            <Button Name="FindBtn" Content="🔍" Width="30" Height="30" ToolTip.Tip="Найти"/>
         </StackPanel>
       </StackPanel>
 

@@ -71,3 +71,4 @@
 /Users/legeninav/projects/ava/ava/obj/Debug/net10.0/ava.pdb
 /Users/legeninav/projects/ava/ava/obj/Debug/net10.0/ava.genruntimeconfig.cache
 /Users/legeninav/projects/ava/ava/obj/Debug/net10.0/ref/ava.dll
+/Users/legeninav/projects/ava/ava/obj/Debug/net10.0/ava.sourcelink.json
