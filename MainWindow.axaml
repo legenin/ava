@@ -1,0 +1,53 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ava"
+        x:Class="ava.MainWindow"
+        x:DataType="{x:Type local:MainWindow}"
+        Title="Главный экран"
+        Width="1200"
+        Height="700">
+  <Grid RowDefinitions="100, *" ColumnDefinitions="300, *" Margin="5">
+    
+    <!-- Первая строка -->
+    <Grid Grid.Row="0" Grid.ColumnSpan="2" ColumnDefinitions="300, *">
+      <StackPanel Grid.Column="0" Orientation="Vertical" Margin="0,30,0,0">
+        <StackPanel Orientation="Horizontal" Spacing="0">
+          <ComboBox Name="RequirementsCombo" PlaceholderText="Выберите проект..." Width="200"/>
+          <Button Name="CreateBtn" Content="➕" Width="30" Height="30" ToolTip.Tip="Создать"/>
+          <Button Name="EditBtn" Content="✏️" Width="30" Height="30" ToolTip.Tip="Редактировать"/>
+          <Button Name="FindBtn" Content="🔍" Width="30" Height="30" ToolTip.Tip="Найти"/>
+        </StackPanel>
+      </StackPanel>
+
+      <Border Grid.Column="1" Background="#f0f0f0" Margin="5">
+        <TextBlock Text="Область для отображения меню" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+      </Border>
+    </Grid>
+
+    <!-- Вторая строка -->
+    <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="300, 0, *">
+      
+      <!-- Меню (30%) -->
+      <Grid Grid.Column="0" x:Name="MenuContainer">
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ToggleButton Grid.Row="0" Name="ToggleMenuBtn" Content="☰" HorizontalAlignment="Right" Margin="5" Width="30" Height="30"/>
+
+        <TreeView Grid.Row="1" Name="MainMenuTree" ItemsSource="{Binding MenuItemsSource}" IsVisible="{Binding IsMenuCollapsed, Converter={StaticResource InverseBooleanConverter}}">
+          <TreeView.DataTemplates>
+            <TreeDataTemplate DataType="{x:Type local:MenuItemModel}" ItemsSource="{Binding Children}">
+              <TextBlock Text="{Binding Header}"/>
+            </TreeDataTemplate>
+          </TreeView.DataTemplates>
+        </TreeView>
+      </Grid>
+
+      <Border Grid.Column="2" Name="MainContentArea" Background="#f9f9f9" Margin="5">
+        <TextBlock Text="Основная рабочая область" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+      </Border>
+    </Grid>
+  </Grid>
+</Window>
