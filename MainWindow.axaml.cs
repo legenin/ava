@@ -1,4 +1,5 @@
 #nullable enable
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System.Collections.ObjectModel;
@@ -19,6 +20,18 @@ public partial class MainWindow : Window
         InitializeComponent();
         SetupMenu();
 
+        var darkThemeMenuItem = this.FindControl<MenuItem>("DarkThemeMenuItem");
+        if (darkThemeMenuItem != null)
+        {
+            darkThemeMenuItem.Click += OnDarkThemeMenuItemClicked;
+        }
+
+        var lightThemeMenuItem = this.FindControl<MenuItem>("LightThemeMenuItem");
+        if (lightThemeMenuItem != null)
+        {
+            lightThemeMenuItem.Click += OnLightThemeMenuItemClicked;
+        }        
+
         var exitMenuItem = this.FindControl<MenuItem>("ExitMenuItem");
         if (exitMenuItem != null)
         {
@@ -32,6 +45,16 @@ public partial class MainWindow : Window
         }
 
         ToggleMenuBtn.Click += OnToggleMenuClicked;
+    }
+
+    private void OnDarkThemeMenuItemClicked(object? sender, RoutedEventArgs e)
+    {
+        Avalonia.Application.Current!.RequestedThemeVariant = Avalonia.Styling.ThemeVariant.Dark;
+    }
+
+    private void OnLightThemeMenuItemClicked(object? sender, RoutedEventArgs e)
+    {
+        Avalonia.Application.Current!.RequestedThemeVariant = Avalonia.Styling.ThemeVariant.Light;
     }
 
     private void OnProjectWindowMenuItemClicked(object? sender, RoutedEventArgs e)

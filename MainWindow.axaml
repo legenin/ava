@@ -25,8 +25,8 @@
       </MenuItem>
       <MenuItem Header="_Вид">
         <MenuItem Header="_Окно проекта" Name="ProjectWindowMenuItem"/>
-        <MenuItem Header="_Тёмная тема"/>
-        <MenuItem Header="_Светлая тема"/>
+        <MenuItem Header="_Тёмная тема"  Name="DarkThemeMenuItem"/>
+        <MenuItem Header="_Светлая тема" Name="LightThemeMenuItem"/>
       </MenuItem>
       <MenuItem Header="_Справочники">
         <MenuItem Header="_Пользователи"/>
