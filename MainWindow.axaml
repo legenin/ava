@@ -41,9 +41,15 @@
         <StackPanel Orientation="Horizontal" Spacing="3">
             <TextBlock Text="Проект" VerticalAlignment="Center"/>
             <ComboBox Name="RequirementsCombo" PlaceholderText="Выберите проект..." Width="200"/>
-            <Button Name="CreateBtn" Content="➕" Width="30" Height="30" ToolTip.Tip="Создать"/>
-            <Button Name="EditBtn" Content="✏️" Width="30" Height="30" ToolTip.Tip="Редактировать"/>
-            <Button Name="FindBtn" Content="🔍" Width="30" Height="30" ToolTip.Tip="Найти"/>
+            <Button Name="EditBtn" Width="30" Height="30" ToolTip.Tip="Редактировать">
+              <Image Source="avares://ava/Assets/icon-edit-black.png" Width="20" Height="20"/>
+            </Button>
+            <Button Name="FindBtn" Width="30" Height="30" ToolTip.Tip="Найти">
+              <Image Source="avares://ava/Assets/icon-search-black.png" Width="20" Height="20"/>
+            </Button>
+            <Button Name="CreateBtn" Width="30" Height="30" ToolTip.Tip="Создать">
+              <Image Source="avares://ava/Assets/icon-add-black.png" Width="20" Height="20"/>              
+            </Button>            
         </StackPanel>
       </StackPanel>
 
