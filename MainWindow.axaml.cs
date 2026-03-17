@@ -2,12 +2,16 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using ava.Models;
 
 namespace ava;
 
 public partial class MainWindow : Window
 {
+    public ObservableCollection<Person> Persons { get; set; }
     public ObservableCollection<MenuItemModel> MenuItemsSource { get; set; }
 
     private bool _isMenuCollapsed = false;
@@ -16,9 +20,16 @@ public partial class MainWindow : Window
 
     public MainWindow()
     {
+        Persons = new ObservableCollection<Person>();
         MenuItemsSource = new ObservableCollection<MenuItemModel>();
+
+        Console.WriteLine("MainWindow constructor started.");
+
         InitializeComponent();
+        SetupPersons();
         SetupMenu();
+
+        DataContext = this;
 
         var darkThemeMenuItem = this.FindControl<MenuItem>("DarkThemeMenuItem");
         if (darkThemeMenuItem != null)
@@ -44,7 +55,71 @@ public partial class MainWindow : Window
             projectWindowMenuItem.Click += OnProjectWindowMenuItemClicked;
         }
 
+        var createBtn2 = this.FindControl<Button>("CreateBtn2");
+        if (createBtn2 != null)
+        {
+            createBtn2.Click += OnCreateBtnClicked;
+        }
+
+        var deleteBtn2 = this.FindControl<Button>("DeleteBtn2");
+        if (deleteBtn2 != null)
+        {
+            deleteBtn2.Click += OnDeleteBtnClicked;
+
+            var editBtn2= this.FindControl<Button>("EditBtn2");
+            if (editBtn2 != null)
+            {
+                editBtn2.Click += OnEditBtnClicked;
+            }
+        }
+
         ToggleMenuBtn.Click += OnToggleMenuClicked;
+
+        Console.WriteLine("MainWindow initialized successfully.");
+    }
+
+    private void OnCreateBtnClicked(object? sender, RoutedEventArgs e)
+    {
+        var newPerson = new Person("Имя", "Фамилия", false);
+        Persons.Add(newPerson);
+
+        Console.WriteLine($"Создана новая запись: {newPerson.FullName}");
+    }
+
+    private void OnDeleteBtnClicked(object? sender, RoutedEventArgs e)
+    {
+        var dataGrid = this.FindControl<DataGrid>("PersonsDataGrid");
+        if (dataGrid != null && dataGrid.SelectedItem is Person selectedPerson)
+        {
+            Persons.Remove(selectedPerson);
+            Console.WriteLine($"Удалена запись: {selectedPerson.FullName}");
+        }
+        else
+        {
+            Console.WriteLine("Нет выбранной записи для удаления.");
+        }
+    }
+
+    private void OnEditBtnClicked(object? sender, RoutedEventArgs e)
+    {
+        var dataGrid = this.FindControl<DataGrid>("PersonsDataGrid");
+        if (dataGrid != null && dataGrid.SelectedItem is Person selectedPerson)
+        {
+            // Пример: изменить имя на "Отредактировано"
+            selectedPerson.FirstName = "Отредактировано";
+            Console.WriteLine($"Отредактирована запись: {selectedPerson.FullName}");
+        }
+        else
+        {
+            Console.WriteLine("Нет выбранной записи для редактирования.");
+        }
+    }
+    
+    private void SetupPersons()
+    {
+        Persons.Add(new Person("Иван", "Иванов", false));
+        Persons.Add(new Person("Петр", "Петров", true));
+        Persons.Add(new Person("Мария", "Сидорова", false));
     }
 
     private void OnDarkThemeMenuItemClicked(object? sender, RoutedEventArgs e)

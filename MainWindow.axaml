@@ -1,11 +1,11 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:ava"
+        xmlns:model="clr-namespace:ava.Models"
         x:Class="ava.MainWindow"
         x:DataType="{x:Type local:MainWindow}"
         Title="Остойчивость"
-        Width="1200"
-        Height="700">
+        WindowState="Maximized">
   <Grid RowDefinitions="Auto, 100, *" ColumnDefinitions="360, *" Margin="5">
     
     <!-- Новая строка: горизонтальное меню -->
@@ -42,13 +42,13 @@
             <TextBlock Text="Проект" VerticalAlignment="Center"/>
             <ComboBox Name="RequirementsCombo" PlaceholderText="Выберите проект..." Width="200"/>
             <Button Name="EditBtn" Width="30" Height="30" ToolTip.Tip="Редактировать">
-              <Image Source="avares://ava/Assets/icon-edit-black.png" Width="20" Height="20"/>
+              <Image Source="avares://ava/Assets/icon-edit-black.png" Width="25" Height="25"/>
             </Button>
             <Button Name="FindBtn" Width="30" Height="30" ToolTip.Tip="Найти">
-              <Image Source="avares://ava/Assets/icon-search-black.png" Width="20" Height="20"/>
+              <Image Source="avares://ava/Assets/icon-search-black.png" Width="25" Height="25"/>
             </Button>
             <Button Name="CreateBtn" Width="30" Height="30" ToolTip.Tip="Создать">
-              <Image Source="avares://ava/Assets/icon-add-black.png" Width="20" Height="20"/>              
+              <Image Source="avares://ava/Assets/icon-add-black.png" Width="25" Height="25"/>              
             </Button>            
         </StackPanel>
       </StackPanel>
@@ -59,10 +59,10 @@
     </Grid>
 
     <!-- Вторая строка -->
-    <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="360, 0, *">
+    <Grid Grid.Row="2" Grid.ColumnSpan="2" ColumnDefinitions="360, 2, *">
       
       <!-- Меню (30%) -->
-      <Grid Grid.Column="0" x:Name="MenuContainer">
+      <Grid Grid.Column="0" x:Name="MenuContainer" MinWidth="360">
         <Grid.RowDefinitions>
           <RowDefinition Height="Auto"/>
           <RowDefinition Height="*"/>
@@ -70,8 +70,8 @@
 
         <!-- <ToggleButton Grid.Row="0" Name="ToggleMenuBtn" Content="☰" HorizontalAlignment="Right" Margin="5" Width="30" Height="30"/> -->
         <DockPanel Grid.Row="0" Margin="5" HorizontalAlignment="Stretch">
-          <TextBlock Text="Окно проекта" VerticalAlignment="Center" DockPanel.Dock="Left"/>
-          <ToggleButton Name="ToggleMenuBtn" Content="☰" Width="30" Height="30" Margin="225,0,5,0"  DockPanel.Dock="Right"/>
+          <TextBlock Text="Окно проекта" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0"/>
+          <ToggleButton Name="ToggleMenuBtn" Content="☰" Width="30" Height="30" HorizontalAlignment="Right" Margin="0"/>
         </DockPanel>
 
         <TreeView Grid.Row="1" Name="MainMenuTree" ItemsSource="{Binding MenuItemsSource}" IsVisible="{Binding IsMenuCollapsed, Converter={StaticResource InverseBooleanConverter}}">
@@ -83,8 +83,35 @@
         </TreeView>
       </Grid>
 
+      <GridSplitter Grid.Column="1" 
+                    Width="2" 
+                    Background="#cccccc" 
+                    ResizeDirection="Columns" 
+                    ResizeBehavior="PreviousAndNext" 
+                    HorizontalAlignment="Stretch" 
+                    ShowsPreview="True"/>
+
       <Border Grid.Column="2" Name="MainContentArea" Background="#f9f9f9" Margin="5">
-        <TextBlock Text="Основная рабочая область" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <StackPanel Orientation="Vertical">
+          <StackPanel Orientation="Horizontal" Margin="5,0,0,5" HorizontalAlignment="Left">
+            <Button Name="CreateBtn2" Content="Создать" Width="100" Height="30" 
+              VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+            <Button Name="DeleteBtn2" Content="Удалить" Width="100" Height="30" 
+              VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+          </StackPanel>
+          <DataGrid Name="PersonsDataGrid" ItemsSource="{Binding Persons}" Margin="5,0,0,5"
+                    GridLinesVisibility="All"
+                    CanUserReorderColumns="True"
+                    CanUserResizeColumns="True"
+                    CanUserSortColumns="True"                  
+                    BorderThickness="1" BorderBrush="Gray">
+            <DataGrid.Columns>
+              <DataGridTextColumn Header="First Name"  Binding="{Binding FirstName}"/>
+              <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
+              <DataGridCheckBoxColumn Header="Fictitious?" Binding="{Binding IsFictitious}" />
+            </DataGrid.Columns>
+          </DataGrid>
+        </StackPanel>
       </Border>
     </Grid>
   </Grid>
