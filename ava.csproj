@@ -18,6 +18,10 @@
       <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Oxyplot.Avalonia" Version="2.1.0-Avalonia11" />
+    <!-- <PackageReference Include="OxyPlot.Avalonia" Version="2.1.0" /> -->
+    <!-- <PackageReference Include="Oxyplot.AvaloniaCore" Version="2.1.3" /> -->
+    <PackageReference Include="OxyPlot.Core" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>

@@ -3,7 +3,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using ava.Models;
 
@@ -13,6 +12,7 @@ public partial class MainWindow : Window
 {
     public ObservableCollection<Person> Persons { get; set; }
     public ObservableCollection<MenuItemModel> MenuItemsSource { get; set; }
+    public LineChartModel LineChart { get; set; }
 
     private bool _isMenuCollapsed = false;
 
@@ -22,6 +22,7 @@ public partial class MainWindow : Window
     {
         Persons = new ObservableCollection<Person>();
         MenuItemsSource = new ObservableCollection<MenuItemModel>();
+        LineChart = new LineChartModel();
 
         Console.WriteLine("MainWindow constructor started.");
 
@@ -29,6 +30,8 @@ public partial class MainWindow : Window
         SetupPersons();
         SetupMenu();
 
+
+        // Устанавливаем DataContext, чтобы привязка сработала
         DataContext = this;
 
         var darkThemeMenuItem = this.FindControl<MenuItem>("DarkThemeMenuItem");

@@ -2,12 +2,14 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:local="clr-namespace:ava"
         xmlns:model="clr-namespace:ava.Models"
+        xmlns:oxy="clr-namespace:OxyPlot.Avalonia;assembly=OxyPlot.Avalonia"
         x:Class="ava.MainWindow"
         x:DataType="{x:Type local:MainWindow}"
         Title="Остойчивость"
         WindowState="Maximized">
   <Grid RowDefinitions="Auto, 100, *" ColumnDefinitions="360, *" Margin="5">
     
+    <!-- xmlns:oxy="https://github.com/oxyplot/oxyplot-avalonia" -->
     <!-- Новая строка: горизонтальное меню -->
     <Menu Grid.Row="0" Grid.ColumnSpan="2">
       <MenuItem Header="_Файл">
@@ -91,7 +93,7 @@
                     HorizontalAlignment="Stretch" 
                     ShowsPreview="True"/>
 
-      <Border Grid.Column="2" Name="MainContentArea" Background="#f9f9f9" Margin="5">
+      <Grid Grid.Column="2" Name="MainContentArea" Background="#f9f9f9" Margin="5">
         <StackPanel Orientation="Vertical">
           <StackPanel Orientation="Horizontal" Margin="5,0,0,5" HorizontalAlignment="Left">
             <Button Name="CreateBtn2" Content="Создать" Width="100" Height="30" 
@@ -111,8 +113,11 @@
               <DataGridCheckBoxColumn Header="Fictitious?" Binding="{Binding IsFictitious}" />
             </DataGrid.Columns>
           </DataGrid>
+          <StackPanel Orientation="Horizontal" Margin="5,0,0,5" HorizontalAlignment="Left">
+            <oxy:PlotView Name="MyPlotView" Model="{Binding LineChart.ChartModel}" Height="700" Width="600" Margin="5" />
+          </StackPanel>
         </StackPanel>
-      </Border>
+      </Grid>
     </Grid>
   </Grid>
 </Window>
