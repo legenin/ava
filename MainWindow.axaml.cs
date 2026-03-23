@@ -4,6 +4,8 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 using ava.Models;
 
 namespace ava;
@@ -12,6 +14,7 @@ public partial class MainWindow : Window
 {
     public ObservableCollection<Person> Persons { get; set; }
     public ObservableCollection<MenuItemModel> MenuItemsSource { get; set; }
+    public ObservableCollection<DataMatrixRow> DataMatrix { get; set; }
     public LineChartModel LineChart { get; set; }
 
     private bool _isMenuCollapsed = false;
@@ -22,6 +25,7 @@ public partial class MainWindow : Window
     {
         Persons = new ObservableCollection<Person>();
         MenuItemsSource = new ObservableCollection<MenuItemModel>();
+        DataMatrix = new ObservableCollection<DataMatrixRow>();
         LineChart = new LineChartModel();
 
         Console.WriteLine("MainWindow constructor started.");
@@ -29,7 +33,8 @@ public partial class MainWindow : Window
         InitializeComponent();
         SetupPersons();
         SetupMenu();
-
+        SetupDataMatrix(); // ✅ Заполняем таблицу данными
+        UpdateChartFromDataMatrix(); // ✅ Обновляем график на основе данных
 
         // Устанавливаем DataContext, чтобы привязка сработала
         DataContext = this;
@@ -182,6 +187,41 @@ public partial class MainWindow : Window
         MainMenuTree.IsVisible = !_isMenuCollapsed;
         UpdateLayout();
     }
+
+    // ✅ Метод для заполнения таблицы данными
+    private void SetupDataMatrix()
+    {
+        var random = new Random();
+        for (int i = 0; i < 10; i++)
+        {
+            DataMatrix.Add(new DataMatrixRow
+            {
+                Index = i,
+                Col1 = Math.Round((random.NextDouble() * 100) - 50, 2),
+                Col2 = Math.Round((random.NextDouble() * 100) - 50, 2),
+                Col3 = Math.Round((random.NextDouble() * 100) - 50, 2),
+                Col4 = Math.Round((random.NextDouble() * 100) - 50, 2),
+                Col5 = Math.Round((random.NextDouble() * 100) - 50, 2)
+            });
+        }
+    }
+
+    // ✅ Метод для обновления графика на основе таблицы
+    private void UpdateChartFromDataMatrix()
+    {
+        // Подготовим данные для графика
+        var seriesData = new List<(string Label, List<(double X, double Y)> Points)>
+        {
+            ("Столбец 1", DataMatrix.Select(r => ((double)r.Index, r.Col1)).ToList()),
+            ("Столбец 2", DataMatrix.Select(r => ((double)r.Index, r.Col2)).ToList()),
+            ("Столбец 3", DataMatrix.Select(r => ((double)r.Index, r.Col3)).ToList()),
+            ("Столбец 4", DataMatrix.Select(r => ((double)r.Index, r.Col4)).ToList()),
+            ("Столбец 5", DataMatrix.Select(r => ((double)r.Index, r.Col5)).ToList()) 
+
+        };
+
+        LineChart.UpdateDataMultipleSeries(seriesData);
+    }    
 
     new void UpdateLayout()
     {

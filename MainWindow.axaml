@@ -8,8 +8,6 @@
         Title="Остойчивость"
         WindowState="Maximized">
   <Grid RowDefinitions="Auto, 100, *" ColumnDefinitions="360, *" Margin="5">
-    
-    <!-- xmlns:oxy="https://github.com/oxyplot/oxyplot-avalonia" -->
     <!-- Новая строка: горизонтальное меню -->
     <Menu Grid.Row="0" Grid.ColumnSpan="2">
       <MenuItem Header="_Файл">
@@ -94,27 +92,69 @@
                     ShowsPreview="True"/>
 
       <Grid Grid.Column="2" Name="MainContentArea" Background="#f9f9f9" Margin="5">
-        <DockPanel>
-          <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="5,0,0,5" HorizontalAlignment="Left">
-            <Button Name="CreateBtn2" Content="Создать" Width="100" Height="30" 
-              VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
-            <Button Name="DeleteBtn2" Content="Удалить" Width="100" Height="30" 
-              VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
-          </StackPanel>
-          <DataGrid DockPanel.Dock="Top" Name="PersonsDataGrid" ItemsSource="{Binding Persons}" Margin="5,0,0,5"
+        <Grid.RowDefinitions>
+          <RowDefinition Height="Auto"/> <!-- Для StackPanel с кнопками -->
+          <RowDefinition Height="Auto"/> <!-- Для PersonsDataGrid -->
+          <RowDefinition Height="*"/>    <!-- Для области с DataMatrixGrid, Splitter и PlotView -->
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="5,0,0,5" HorizontalAlignment="Left">
+          <Button Name="CreateBtn2" Content="Создать" Width="100" Height="30" 
+            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+          <Button Name="DeleteBtn2" Content="Удалить" Width="100" Height="30" 
+            VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,5,0"/>
+        </StackPanel>
+       
+        <DataGrid Grid.Row="1" Name="PersonsDataGrid" ItemsSource="{Binding Persons}" Margin="5,0,0,5"
+                  GridLinesVisibility="All"
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+                  CanUserSortColumns="True"                  
+                  BorderThickness="1" BorderBrush="Gray">
+          <DataGrid.Columns>
+            <DataGridTextColumn Header="First Name"  Binding="{Binding FirstName}"/>
+            <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
+            <DataGridCheckBoxColumn Header="Fictitious?" Binding="{Binding IsFictitious}" />
+          </DataGrid.Columns>
+        </DataGrid>
+
+        <Grid Grid.Row="2">
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/> <!-- Для DataMatrixGrid -->
+            <ColumnDefinition Width="2"/> <!-- Для GridSplitter -->
+            <ColumnDefinition Width="*"/> <!-- Для PlotView -->
+          </Grid.ColumnDefinitions>
+
+          <!-- Таблица с данными -->
+          <DataGrid Grid.Column="0" Name="DataMatrixGrid" ItemsSource="{Binding DataMatrix}" Margin="5,0,5,5"
                     GridLinesVisibility="All"
-                    CanUserReorderColumns="True"
+                    CanUserReorderColumns="False"
                     CanUserResizeColumns="True"
-                    CanUserSortColumns="True"                  
-                    BorderThickness="1" BorderBrush="Gray">
+                    CanUserSortColumns="True"
+                    BorderThickness="1" BorderBrush="Gray"
+                    IsReadOnly="False"> <!-- Сделаем таблицу только для чтения -->
             <DataGrid.Columns>
-              <DataGridTextColumn Header="First Name"  Binding="{Binding FirstName}"/>
-              <DataGridTextColumn Header="Last Name" Binding="{Binding LastName}" />
-              <DataGridCheckBoxColumn Header="Fictitious?" Binding="{Binding IsFictitious}" />
+              <DataGridTextColumn Header="№" Binding="{Binding Index, Mode=OneTime}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Столбец 1" Binding="{Binding Col1, StringFormat=N2}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Столбец 2" Binding="{Binding Col2, StringFormat=N2}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Столбец 3" Binding="{Binding Col3, StringFormat=N2}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Столбец 4" Binding="{Binding Col4, StringFormat=N2}" IsReadOnly="True"/>
+              <DataGridTextColumn Header="Столбец 5" Binding="{Binding Col5, StringFormat=N2}" IsReadOnly="True"/>
             </DataGrid.Columns>
           </DataGrid>
-          <oxy:PlotView Name="MyPlotView" Model="{Binding LineChart.ChartModel}" Height="700" HorizontalAlignment="Stretch" Margin="5" />
-        </DockPanel>
+
+          <!--ter между таблицей и графиком -->
+          <GridSplitter Grid.Column="1"
+                        Width="2"
+                        Background="#cccccc"
+                        ResizeDirection="Columns"
+                        ResizeBehavior="PreviousAndNext"
+                        HorizontalAlignment="Stretch"
+                        ShowsPreview="True"/>        
+
+          <!-- PlotView для отображения графиков -->
+          <oxy:PlotView Grid.Column="2" Name="MyPlotView" Model="{Binding LineChart.ChartModel}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="5,0,5,5" />          
+        </Grid>
       </Grid>
     </Grid>
   </Grid>

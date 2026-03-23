@@ -4,7 +4,6 @@ using OxyPlot.Series;
 using HorizontalAlignment = OxyPlot.HorizontalAlignment;
 using OxyPlot.Legends;
 using System.Collections.Generic;
-using System.Drawing;
 
 namespace ava.Models
 {
@@ -89,5 +88,81 @@ namespace ava.Models
                 ChartModel.InvalidatePlot(true);
             }
         }
+
+        public void UpdateDataMultipleSeries(List<(string Label, List<(double X, double Y)> Points)> seriesData)
+        {
+            ChartModel.Series.Clear(); // Очищаем старые серии
+            ChartModel.Axes.Clear();   // Очищаем старые оси
+            ChartModel.Legends.Clear();
+
+            var legend = new Legend()
+            {
+                LegendBorder = OxyColors.Black,
+                LegendBackground = OxyColor.FromAColor(200, OxyColors.White),
+                LegendPosition = LegendPosition.RightTop,
+                LegendPlacement = LegendPlacement.Outside,
+                LegendOrientation = LegendOrientation.Vertical,
+                LegendItemOrder = LegendItemOrder.Normal,
+                LegendItemAlignment = HorizontalAlignment.Left,
+                LegendSymbolPlacement = LegendSymbolPlacement.Left,
+                LegendMaxWidth = 200,
+                LegendMaxHeight = 800,
+            };
+            ChartModel.Legends.Add(legend);
+
+            // Добавляем оси
+            ChartModel.Axes.Add(new LinearAxis 
+            { 
+                Position = AxisPosition.Bottom, 
+                Title = "Значение X",
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dot,
+                TickStyle = TickStyle.Crossing,
+                AxislineStyle = LineStyle.Solid,
+                AxislineThickness = 2,
+                PositionAtZeroCrossing = true,
+                Minimum = -2,
+            });
+            ChartModel.Axes.Add(new LinearAxis 
+            { 
+                Position = AxisPosition.Left, 
+                Title = "Значение Y",
+                MajorGridlineStyle = LineStyle.Solid,
+                MinorGridlineStyle = LineStyle.Dot,
+                TickStyle = TickStyle.Crossing,
+                AxislineStyle = LineStyle.Solid,
+                AxislineThickness = 2,
+                PositionAtZeroCrossing = true,
+            });
+
+            ChartModel.PlotAreaBorderThickness = new OxyThickness(0);
+            ChartModel.PlotMargins = new OxyThickness(10);
+
+            // Цвета для разных серий (можно сделать более гибко)
+            var colors = new OxyColor[] { OxyColors.Blue, OxyColors.Red, OxyColors.Green, OxyColors.Orange, OxyColors.Purple };
+
+            for (int i = 0; i < seriesData.Count; i++)
+            {
+                var seriesInfo = seriesData[i];
+                var series = new LineSeries
+                {
+                    Title = seriesInfo.Label,
+                    MarkerType = MarkerType.Square, // Или Circle, если нужны точки
+                    Color = colors[i % colors.Length], // Циклически выбираем цвет
+                    LabelFormatString = "{1:0.00}",
+                    FontSize = 20,
+                    InterpolationAlgorithm = InterpolationAlgorithms.CanonicalSpline,                    
+                };
+
+                foreach (var point in seriesInfo.Points)
+                {
+                    series.Points.Add(new DataPoint(point.X, point.Y));
+                }
+
+                ChartModel.Series.Add(series);
+            }
+
+            ChartModel.InvalidatePlot(true);
+        }        
     }
 }
