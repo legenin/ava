@@ -1,0 +1,16 @@
+is_global = true
+build_property.AvaloniaNameGeneratorIsEnabled = true
+build_property.AvaloniaNameGeneratorBehavior = InitializeComponent
+build_property.AvaloniaNameGeneratorDefaultFieldModifier = internal
+build_property.AvaloniaNameGeneratorFilterByPath = *
+build_property.AvaloniaNameGeneratorFilterByNamespace = *
+build_property.RootNamespace = OxyPlot.Avalonia
+build_property.ProjectDir = D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.CsWinRTUseWindowsUIXamlProjections = false
+build_property.EffectiveAnalysisLevelStyle = 
+build_property.EnableCodeStyleSeverity = 
+
+[D:/work/ava/oxyplot-avalonia/Source/OxyPlot.Avalonia/Themes/Default.axaml]
+build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

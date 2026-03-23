@@ -1,0 +1,16 @@
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\bin\Debug\netstandard2.0\OxyPlot.Avalonia.deps.json
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\bin\Debug\netstandard2.0\OxyPlot.Avalonia.dll
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\bin\Debug\netstandard2.0\OxyPlot.Avalonia.pdb
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\OxyPlot.Avalonia.csproj.AssemblyReference.cache
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\Avalonia\Resources.Inputs.cache
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\Avalonia\resources
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\OxyPlot.Avalonia.GeneratedMSBuildEditorConfig.editorconfig
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\OxyPlot.Avalonia.AssemblyInfoInputs.cache
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\OxyPlot.Avalonia.AssemblyInfo.cs
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\OxyPlot.Avalonia.csproj.CoreCompileInputs.cache
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\OxyPlot.Avalonia.sourcelink.json
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\Avalonia\references
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\Avalonia\original.dll
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\Avalonia\original.pdb
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\OxyPlot.Avalonia.dll
+D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\obj\Debug\netstandard2.0\OxyPlot.Avalonia.pdb

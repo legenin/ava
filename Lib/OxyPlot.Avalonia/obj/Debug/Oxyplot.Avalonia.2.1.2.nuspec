@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Oxyplot.Avalonia</id>
+    <version>2.1.2</version>
+    <authors>OxyPlot.Avalonia</authors>
+    <license type="expression">MIT</license>
+    <licenseUrl>https://licenses.nuget.org/MIT</licenseUrl>
+    <icon>OxyPlot_128.png</icon>
+    <readme>README.md</readme>
+    <projectUrl>http://oxyplot.org/</projectUrl>
+    <description>OxyPlot is a plotting library for .NET. This is a support library for OxyPlot to work with AvaloniaUI.</description>
+    <copyright>OxyPlot contributors</copyright>
+    <tags>plotting plot charting chart</tags>
+    <repository type="git" url="https://github.com/oxyplot/oxyplot.git" commit="9913a97d79a75585abd0ee5b417739ac52bca4c6" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.0">
+        <dependency id="Avalonia" version="11.0.0" exclude="Build,Analyzers" />
+        <dependency id="OxyPlot.Core" version="2.1.2" exclude="Build,Analyzers" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="D:\work\ava\oxyplot-avalonia\Source\OxyPlot.Avalonia\bin\Debug\netstandard2.0\OxyPlot.Avalonia.dll" target="lib\netstandard2.0\OxyPlot.Avalonia.dll" />
+    <file src="D:\work\ava\oxyplot-avalonia\Icons\OxyPlot_128.png" target="\OxyPlot_128.png" />
+    <file src="D:\work\ava\oxyplot-avalonia\README.md" target="\README.md" />
+  </files>
+</package>
